@@ -1,4 +1,4 @@
-package mz.co.muianga.muiangalibrary;
+package mz.co.muianga.library;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
