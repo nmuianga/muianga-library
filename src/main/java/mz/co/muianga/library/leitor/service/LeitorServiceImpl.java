@@ -1,6 +1,8 @@
 package mz.co.muianga.library.leitor.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 import mz.co.muianga.library.leitor.model.Leitor;
 import mz.co.muianga.library.leitor.repository.LeitorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +42,9 @@ public class LeitorServiceImpl implements LeitorService {
     public void setLeitorRepository(LeitorRepository leitorRepository) {
         this.leitorRepository = leitorRepository;
     }
+
+	@Override
+	public List<Leitor> findAll() {
+		return this.leitorRepository.findAll();
+	}
 }
