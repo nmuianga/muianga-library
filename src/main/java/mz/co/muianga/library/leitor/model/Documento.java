@@ -1,11 +1,10 @@
 package mz.co.muianga.library.leitor.model;
 
-import org.apache.tomcat.jni.Local;
-
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @Entity
 public class Documento implements Serializable {
@@ -32,6 +31,7 @@ public class Documento implements Serializable {
     private LocalDateTime dataCadastro;
 
     @OneToOne (mappedBy = "documentoIdentificacao")
+    @JsonBackReference
     private Leitor leitor;
 
     public Long getId() {

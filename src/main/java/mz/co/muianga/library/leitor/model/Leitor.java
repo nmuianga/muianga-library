@@ -1,9 +1,11 @@
 package mz.co.muianga.library.leitor.model;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @Entity
 public class Leitor implements Serializable {
@@ -12,17 +14,20 @@ public class Leitor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String nome;
 
     @Column (nullable = false)
     private String apelido;
 
-    @Column (name = "data_nascimento")
+    @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
     private String genero;
+
+    @Column (nullable = false)
     private String endereco;
 
+    @Enumerated(EnumType.STRING)
     @Column (name = "local_nascimento")
     private Provincia localNascimento;
 
@@ -32,8 +37,9 @@ public class Leitor implements Serializable {
     @Column (name = "data_cadastro")
     private LocalDateTime dataCadastro;
 
-    @OneToOne
+    @OneToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn (name = "documento_id")
+    @JsonManagedReference
     private Documento documentoIdentificacao;
 
     public Long getId() {
