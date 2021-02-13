@@ -1,5 +1,6 @@
 package mz.co.muianga.library.leitor.resources;
 
+import mz.co.muianga.library.leitor.exception.ValidationException;
 import mz.co.muianga.library.leitor.model.Documento;
 import mz.co.muianga.library.leitor.model.Leitor;
 import mz.co.muianga.library.leitor.resources.dto.DocumentoDTO;
@@ -18,7 +19,7 @@ public class LeitorResources {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public LeitorDTO save(@RequestBody LeitorDTO leitorDTO) {
+    public LeitorDTO save(@RequestBody LeitorDTO leitorDTO) throws ValidationException {
         return map(leitorService.save(map(leitorDTO)));
     }
 
