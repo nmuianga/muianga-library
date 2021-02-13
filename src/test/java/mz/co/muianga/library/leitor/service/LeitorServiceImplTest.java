@@ -1,22 +1,26 @@
 package mz.co.muianga.library.leitor.service;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import mz.co.muianga.library.leitor.exception.ValidationException;
 import mz.co.muianga.library.leitor.model.Documento;
 import mz.co.muianga.library.leitor.model.Leitor;
 import mz.co.muianga.library.leitor.model.Provincia;
 import mz.co.muianga.library.leitor.repository.LeitorRepository;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.internal.matchers.Any;
-import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class LeitorServiceImplTest {
