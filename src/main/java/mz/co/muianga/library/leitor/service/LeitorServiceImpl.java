@@ -19,7 +19,7 @@ public class LeitorServiceImpl implements LeitorService {
             throw new ValidationException("The reader can't be null");
         }
 
-        if (StringUtils.isBlank(leitor.getNome())) {
+        if (leitor.getNome() == null || StringUtils.isBlank(leitor.getNome())) {
             throw  new ValidationException("The name mustn't be null");
         }
 
@@ -31,7 +31,10 @@ public class LeitorServiceImpl implements LeitorService {
             throw new ValidationException("Please, type a valid gender");
         }
 
-        if (leitor.getGenero() != null && !StringUtils.isBlank(leitor.getGenero()) && !"Masculino".equals(leitor.getGenero()) && !"Feminino".equals(leitor.getGenero())) {
+        if (leitor.getGenero() != null && !StringUtils.isBlank(leitor.getGenero())
+                && StringUtils.equals("Masculino", leitor.getGenero())
+                && StringUtils.equals("Feminino", leitor.getGenero())) {
+
             throw new ValidationException("Please, type a valid gender");
         }
 
