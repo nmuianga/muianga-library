@@ -6,6 +6,7 @@ import mz.co.muianga.library.leitor.model.Provincia;
 
 public class DocumentoDTO {
 
+    @JsonProperty("numero")
     private String numero;
 
     @JsonProperty("data_emissao")
@@ -13,6 +14,8 @@ public class DocumentoDTO {
 
     @JsonProperty("data_validade")
     private LocalDate dataValidade;
+
+    @JsonProperty("vitalicio")
     private boolean vitalicio;
 
     @JsonProperty("local_emissao")
