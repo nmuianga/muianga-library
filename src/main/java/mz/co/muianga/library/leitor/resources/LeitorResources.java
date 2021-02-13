@@ -16,15 +16,37 @@ public class LeitorResources {
     @Autowired
     private LeitorService leitorService;
 
-    @GetMapping
-    public String hello() {
-        return "Hello Nino";
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Leitor save(@RequestBody LeitorDTO leitorDTO) {
-        return leitorService.save(map(leitorDTO));
+    public LeitorDTO save(@RequestBody LeitorDTO leitorDTO) {
+        return map(leitorService.save(map(leitorDTO)));
+    }
+
+    private LeitorDTO map(Leitor leitor) {
+        LeitorDTO leitorDTO = new LeitorDTO();
+
+        leitorDTO.setApelido(leitor.getApelido());
+        leitorDTO.setNome(leitor.getNome());
+        leitorDTO.setEndereco(leitor.getEndereco());
+        leitorDTO.setGenero(leitor.getGenero());
+        leitorDTO.setDataNascimento(leitor.getDataNascimento());
+        leitorDTO.setTelefone(leitor.getTelefone());
+        leitorDTO.setLocalNascimento(leitor.getLocalNascimento());
+        leitorDTO.setDocumentoDTO(map(leitor.getDocumentoIdentificacao()));
+
+        return leitorDTO;
+    }
+
+    private DocumentoDTO map(Documento documento) {
+        DocumentoDTO documentoDTO = new DocumentoDTO();
+
+        documentoDTO.setNumero(documento.getNumero());
+        documentoDTO.setDataEmissao(documento.getDataEmissao());
+        documentoDTO.setDataValidade(documento.getDataValidade());
+        documentoDTO.setLocalEmissao(documento.getLocalEmissao());
+        documentoDTO.setVitalicio(documento.isVitalicio());
+
+        return documentoDTO;
     }
 
     private Leitor map(LeitorDTO leitorDTO) {
