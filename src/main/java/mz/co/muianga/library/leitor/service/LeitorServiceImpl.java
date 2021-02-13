@@ -27,13 +27,13 @@ public class LeitorServiceImpl implements LeitorService {
             throw  new ValidationException("The surename mustn't be null");
         }
 
-        if (leitor.getGenero() == null) {
+        if (leitor.getGenero() == null || StringUtils.isBlank(leitor.getGenero())) {
             throw new ValidationException("Please, type a valid gender");
         }
 
         if (leitor.getGenero() != null && !StringUtils.isBlank(leitor.getGenero())
-                && StringUtils.equals("Masculino", leitor.getGenero())
-                && StringUtils.equals("Feminino", leitor.getGenero())) {
+                && !StringUtils.equals("Masculino", leitor.getGenero())
+                && !StringUtils.equals("Feminino", leitor.getGenero())) {
 
             throw new ValidationException("Please, type a valid gender");
         }
@@ -42,7 +42,7 @@ public class LeitorServiceImpl implements LeitorService {
             throw new ValidationException("The document mustn't be null");
         }
 
-        if (StringUtils.isBlank(leitor.getDocumentoIdentificacao().getNumero())) {
+        if (leitor.getDocumentoIdentificacao().getNumero() == null || StringUtils.isBlank(leitor.getDocumentoIdentificacao().getNumero())) {
             throw new ValidationException("The document number mustn't be null");
         }
 
@@ -59,7 +59,7 @@ public class LeitorServiceImpl implements LeitorService {
         }
 
          if (leitor.getDocumentoIdentificacao().getLocalEmissao() == null) {
-             throw new ValidationException("Plese, type document issue place");
+             throw new ValidationException("Please, type the document issue place");
          }
 
         leitor.setDataCadastro(LocalDateTime.now());
