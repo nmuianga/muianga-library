@@ -1,5 +1,8 @@
 package mz.co.muianga.library.leitor.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import mz.co.muianga.library.leitor.model.Documento;
 import mz.co.muianga.library.leitor.model.Leitor;
 import mz.co.muianga.library.leitor.resources.dto.DocumentoDTO;
@@ -59,5 +62,13 @@ public abstract class AbstractResources {
         documento.setVitalicio(documentoDTO.isVitalicio());
 
         return documento;
+    }
+    
+    protected List<LeitorDTO> map(List<Leitor> leitores) {
+    	
+    	return leitores.stream()
+	    	.map(this::map)
+	    	.collect(Collectors.toList());
+    	
     }
 }

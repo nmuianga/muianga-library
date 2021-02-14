@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import mz.co.muianga.library.leitor.exception.ValidationException;
-import mz.co.muianga.library.leitor.model.Leitor;
 import mz.co.muianga.library.leitor.resources.dto.LeitorDTO;
 import mz.co.muianga.library.leitor.service.LeitorService;
 
@@ -31,8 +30,8 @@ public class LeitorResources extends AbstractResources{
     
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Leitor> findAll() {
-    	return leitorService.findAll();
+    public List<LeitorDTO> findAll() {
+    	return map(leitorService.findAll());
     }
     
 }

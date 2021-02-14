@@ -9,7 +9,12 @@ import javax.persistence.*;
 @Entity
 public class Documento implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String numero;
