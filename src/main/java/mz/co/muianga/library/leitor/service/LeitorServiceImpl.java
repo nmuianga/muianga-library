@@ -69,14 +69,15 @@ public class LeitorServiceImpl implements LeitorService {
 
         return leitorRepository.save(leitor);
     }
+    
+    @Override
+	public List<Leitor> findAll() {
+		return this.leitorRepository.findAll();
+	}
 
     @Autowired
     public void setLeitorRepository(LeitorRepository leitorRepository) {
         this.leitorRepository = leitorRepository;
     }
 
-	@Override
-	public List<Leitor> findAll() {
-		return this.leitorRepository.findAll();
-	}
 }
