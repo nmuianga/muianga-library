@@ -1,7 +1,5 @@
 package mz.co.muianga.library.leitor.resources;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import mz.co.muianga.library.leitor.exception.ValidationException;
 import mz.co.muianga.library.leitor.resources.dto.LeitorDTO;
+import mz.co.muianga.library.leitor.resources.dto.ListLeitorDTO;
 import mz.co.muianga.library.leitor.service.LeitorService;
 
 @RestController
@@ -30,7 +29,7 @@ public class LeitorResources extends AbstractResources{
     
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<LeitorDTO> findAll() {
+    public ListLeitorDTO findAll() {
     	return map(leitorService.findAll());
     }
     

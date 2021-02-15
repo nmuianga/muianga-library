@@ -7,6 +7,7 @@ import mz.co.muianga.library.leitor.model.Documento;
 import mz.co.muianga.library.leitor.model.Leitor;
 import mz.co.muianga.library.leitor.resources.dto.DocumentoDTO;
 import mz.co.muianga.library.leitor.resources.dto.LeitorDTO;
+import mz.co.muianga.library.leitor.resources.dto.ListLeitorDTO;
 
 public abstract class AbstractResources {
 
@@ -64,11 +65,16 @@ public abstract class AbstractResources {
         return documento;
     }
     
-    protected List<LeitorDTO> map(List<Leitor> leitores) {
+    protected ListLeitorDTO map(List<Leitor> leitores) {
+    	ListLeitorDTO leitorDTO = new ListLeitorDTO(); 
     	
-    	return leitores.stream()
+    	List<LeitorDTO> leitoresDTO = leitores.stream()
 	    	.map(this::map)
 	    	.collect(Collectors.toList());
     	
+    	leitorDTO.setLeitores(leitoresDTO);
+    	
+    	return leitorDTO;
     }
+    
 }
