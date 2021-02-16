@@ -1,8 +1,9 @@
 package mz.co.muianga.library.leitor.resources.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import mz.co.muianga.library.leitor.model.Provincia;
 
 public class LeitorDTO {

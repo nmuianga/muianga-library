@@ -1,10 +1,15 @@
 package mz.co.muianga.library.leitor.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +40,7 @@ class LeitorServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        leitor = buildLeitor();
+        leitor = buildLeitores().get(0);
     }
 
     @Test
@@ -174,23 +179,37 @@ class LeitorServiceImplTest {
 
         Assertions.assertThrows(ValidationException.class, () -> service.save(leitor));
     }
+    
+    @Test
+    @DisplayName("Find all readers")
+    @Order(17)
+    void findAll() {
+    	List<Leitor> actualReaders = buildLeitores();
+    	
+    	when(leitorRepository.findAll()).thenReturn(actualReaders);
+    	
+    	List<Leitor> expectedReaders = service.findAll();
+    	
+    	assertNotNull(expectedReaders);
+    	assertTrue(expectedReaders.size() > 0);
+    	assertEquals(expectedReaders.size(), actualReaders.size());
+    }
 
     @Test
     @DisplayName("Success")
     @Order(99)
     void save() throws ValidationException {
-        Leitor leitor = buildLeitor();
+        leitor = buildLeitores().get(0);
 
         when(leitorRepository.save(any(Leitor.class))).thenReturn(leitor);
 
         Leitor expectedLeitor = service.save(leitor);
-        long expectedId = 1L;
 
         Assertions.assertNotNull(expectedLeitor);
         Assertions.assertEquals(expectedLeitor.getId(), leitor.getId());
     }
 
-    private Leitor buildLeitor() {
+    private List<Leitor> buildLeitores() {
         Documento documento = new Documento();
         documento.setId(1L);
         documento.setVitalicio(false);
@@ -212,8 +231,34 @@ class LeitorServiceImplTest {
         leitor.setDataCadastro(LocalDateTime.now());
         leitor.setDocumentoIdentificacao(documento);
         documento.setLeitor(leitor);
+        
+        Documento documento1 = new Documento();
+        documento1.setId(1L);
+        documento1.setVitalicio(false);
+        documento1.setDataValidade(LocalDate.now());
+        documento1.setNumero("12534");
+        documento1.setLocalEmissao(Provincia.MAPUTO);
+        documento1.setDataEmissao(LocalDate.now());
+        documento1.setDataCadastro(LocalDateTime.now());
+        
+        Leitor leitor1 = new Leitor();
+        leitor1.setId(1L);
+        leitor1.setNome("Nilvandro");
+        leitor1.setApelido("Muianga");
+        leitor1.setTelefone("823936154");
+        leitor1.setEndereco("Habel Jafar");
+        leitor1.setGenero("Masculino");
+        leitor1.setLocalNascimento(Provincia.MAPUTO);
+        leitor1.setDataNascimento(LocalDate.now());
+        leitor1.setDataCadastro(LocalDateTime.now());
+        leitor1.setDocumentoIdentificacao(documento1);
+        documento1.setLeitor(leitor1);
+        
+        List<Leitor> leitores = new ArrayList<>();
+        leitores.add(leitor);
+        leitores.add(leitor1);
 
-        return leitor;
+        return leitores;
     }
 
 }

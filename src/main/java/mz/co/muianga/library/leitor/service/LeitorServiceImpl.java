@@ -1,6 +1,7 @@
 package mz.co.muianga.library.leitor.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import mz.co.muianga.library.leitor.exception.ValidationException;
 import mz.co.muianga.library.leitor.model.Leitor;
 import mz.co.muianga.library.leitor.repository.LeitorRepository;
@@ -68,9 +69,15 @@ public class LeitorServiceImpl implements LeitorService {
 
         return leitorRepository.save(leitor);
     }
+    
+    @Override
+	public List<Leitor> findAll() {
+		return this.leitorRepository.findAll();
+	}
 
     @Autowired
     public void setLeitorRepository(LeitorRepository leitorRepository) {
         this.leitorRepository = leitorRepository;
     }
+
 }
