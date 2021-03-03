@@ -2,6 +2,7 @@ package mz.co.muianga.library.leitor.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,6 +39,8 @@ class LeitorServiceImplTest {
     LeitorRepository leitorRepository;
 
     Leitor leitor;
+    
+    private static final Long LEITOR_ID = 1L;
 
     @BeforeEach
     void setUp() {
@@ -193,6 +197,32 @@ class LeitorServiceImplTest {
     	assertNotNull(expectedReaders);
     	assertTrue(expectedReaders.size() > 0);
     	assertEquals(expectedReaders.size(), actualReaders.size());
+    }
+    
+    @Test
+    @DisplayName("Find Reader by Id")
+    @Order(18)
+    void findById() {
+    	leitor.setId(LEITOR_ID);
+    	
+    	when(leitorRepository.findById(any(Long.class))).thenReturn(Optional.of(leitor));
+    	
+    	Leitor actualLeitor = service.findById(LEITOR_ID);
+    	
+    	assertNotNull(actualLeitor);
+    	assertEquals(LEITOR_ID, actualLeitor.getId());
+    	assertEquals(LEITOR_ID, leitor.getId());
+    }
+    
+    @Test
+    @DisplayName("Reader not found")
+    @Order(19)
+    void readerNotFound() {
+    	when(leitorRepository.findById(any(Long.class))).thenReturn(Optional.empty());
+    	
+    	Leitor leitorExpected = service.findById(LEITOR_ID);
+    	
+    	assertNull(leitorExpected);
     }
 
     @Test

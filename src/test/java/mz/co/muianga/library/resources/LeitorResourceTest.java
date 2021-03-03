@@ -1,4 +1,4 @@
-package mz.co.muianga.library;
+package mz.co.muianga.library.resources;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

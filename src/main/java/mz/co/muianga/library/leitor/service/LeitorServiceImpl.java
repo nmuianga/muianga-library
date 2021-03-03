@@ -75,7 +75,12 @@ public class LeitorServiceImpl implements LeitorService {
 		return this.leitorRepository.findAll();
 	}
 
-    @Autowired
+    @Override
+	public Leitor findById(Long id) {
+		return leitorRepository.findById(id).orElse(null);
+	}
+
+	@Autowired
     public void setLeitorRepository(LeitorRepository leitorRepository) {
         this.leitorRepository = leitorRepository;
     }
