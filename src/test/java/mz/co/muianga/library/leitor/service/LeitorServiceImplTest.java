@@ -184,7 +184,6 @@ class LeitorServiceImplTest {
         when(leitorRepository.save(any(Leitor.class))).thenReturn(leitor);
 
         Leitor expectedLeitor = service.save(leitor);
-        long expectedId = 1L;
 
         Assertions.assertNotNull(expectedLeitor);
         Assertions.assertEquals(expectedLeitor.getId(), leitor.getId());
