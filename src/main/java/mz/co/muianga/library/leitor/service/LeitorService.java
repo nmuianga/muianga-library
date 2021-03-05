@@ -10,4 +10,6 @@ public interface LeitorService {
 	
     List<Leitor> findAll();
     
+    Leitor findById(Long id);
+    
 }
